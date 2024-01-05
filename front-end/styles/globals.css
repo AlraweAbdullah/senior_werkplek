@@ -1,0 +1,85 @@
+html,
+body {
+  overflow-x: hidden; /* Voorkom horizontale schuifbalk op de hele pagina */
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+}
+
+.link {
+  color : #FFFFFF !important;
+  font-weight: bold !important; 
+  margin-left: 1px;
+}
+
+.active,
+.link:hover {
+  background-color: #FFFFFF !important ;
+  color: #198754 !important
+}
+
+.link:hover{
+  transition: background-color 0.5s ease,
+              color 0.5s ease;
+}
+
+.thead{
+  font-size: 12px;
+}
+
+.custom-color {
+  background-color: #000;
+}
+
+input{
+  background-color: #f0efef !important;
+}
+
+h1, h2, h3, h4, h5:not(.card-title), h6,  label, .social-links a, .footer{
+  color: #198754 !important;
+}
+
+.calendly-heading {
+  margin: 0;
+}
+
+.question{
+  cursor: pointer
+}
+
+
+.form-check-input:checked {
+  background-color: #198754 !important;
+}

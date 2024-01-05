@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  name     String
+  password String
+  lastName String
+  email    String    @unique
+  devices  Device[]
+  role     String
+  Problem  Problem[]
+}
+
+model Device {
+  id            Int        @id @default(autoincrement())
+  name          String
+  purchaseDate  DateTime?
+  user          User       @relation(fields: [user_id], references: [id])
+  user_id       Int
+  deviceType    DeviceType @relation(fields: [deviceType_id], references: [id])
+  deviceType_id Int
+  problems      Problem[]
+  status        String    @default("In gebruik")
+
+  @@unique([user_id, name, deviceType_id])
+}
+
+model DeviceType {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  devices   Device[]
+  questions Question[]
+}
+
+model Problem {
+  id        Int    @id @default(autoincrement())
+  device    Device @relation(fields: [device_id], references: [id], onDelete: Cascade)
+  device_id Int
+  issue     Issue  @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  issueId   Int
+  user      User?  @relation(fields: [userId], references: [id])
+  status    String
+  userId    Int?
+}
+
+model Issue {
+  id          Int        @id @default(autoincrement())
+  description String
+  answer      String?
+  problems    Problem[]
+  questions   Question[]
+}
+
+model Question {
+  id               Int         @id @default(autoincrement())
+  questionStr      String
+  parentQuestionId Int?
+  parentQuestion   Question?   @relation(fields: [parentQuestionId], references: [id], name: "parent")
+  issueId          Int?
+  issue            Issue?      @relation(fields: [issueId], references: [id])
+  questions        Question[]  @relation(name: "parent")
+  deviceType       DeviceType? @relation(fields: [deviceTypeId], references: [id])
+  deviceTypeId     Int?
+}
